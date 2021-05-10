@@ -30,15 +30,38 @@ export function validateStreamName(name?: string) {
   return validateName("stream", name);
 }
 
+function badChar(s: string): string {
+  switch (s) {
+    case ".":
+      return "dot (.)";
+    case "*":
+      return "asterisk (*)";
+    case ">":
+      return "greater than (>)";
+    case "\r":
+      return "carriage return (␍)";
+    case "\n":
+      return "line feed (␊)";
+    case "\t":
+      return "tab (␉)";
+    case "\f":
+      return "form feed (␌)";
+    default:
+      return "unknown";
+  }
+}
+
 export function validateName(context: string, name = "") {
   if (name === "") {
     throw Error(`${context} name required`);
   }
-  const bad = [".", "*", ">"];
+  const bad = [".", "*", ">", "\r", "\n", "\t", "\f"];
   bad.forEach((v) => {
-    if (name.indexOf(v) !== -1) {
+    const idx = name.indexOf(v);
+    if (idx !== -1) {
+      const rep = badChar(v);
       throw Error(
-        `invalid ${context} name - ${context} name cannot contain '${v}'`,
+        `invalid ${context} name - ${context} name cannot contain '${rep}'`,
       );
     }
   });

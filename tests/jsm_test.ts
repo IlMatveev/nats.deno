@@ -41,7 +41,10 @@ import {
 } from "./jstest_util.ts";
 import { connect } from "../src/mod.ts";
 import { assertThrowsAsyncErrorCode } from "./helpers/mod.ts";
-import { validateName } from "../nats-base-client/jsutil.ts";
+import {
+  validateName,
+  validateStreamName,
+} from "../nats-base-client/jsutil.ts";
 
 const StreamNameRequired = "stream name required";
 const ConsumerNameRequired = "durable name required";
@@ -536,19 +539,23 @@ Deno.test("jsm - advisories", async () => {
 });
 
 Deno.test("jsm - validate name", () => {
-  type t = [string, boolean];
+  type t = [string, boolean, string];
   const tests: t[] = [
-    ["", false],
-    [".", false],
-    ["*", false],
-    [">", false],
-    ["hello.", false],
-    ["hello.*", false],
-    ["hello.>", false],
-    ["one.two", false],
-    ["one*two", false],
-    ["one>two", false],
-    ["stream", true],
+    ["", false, "name required"],
+    [".", false, "dot"],
+    ["*", false, "asterisk"],
+    [">", false, "greater than"],
+    ["hello\n", false, "line feed"],
+    ["hello\r", false, "carriage return"],
+    ["he\tllo", false, "tab"],
+    ["he\fllo", false, "form feed"],
+    ["hello.", false, "dot"],
+    ["hello*", false, "asterisk"],
+    ["hello>", false, "greater than"],
+    ["one.two", false, "dot"],
+    ["one*two", false, "asterisk"],
+    ["one>two", false, "greater than"],
+    ["stream", true, ""],
   ];
 
   tests.forEach((v, idx) => {
@@ -557,10 +564,11 @@ Deno.test("jsm - validate name", () => {
       if (!v[1]) {
         fail(`${v[0]} should have been rejected`);
       }
-    } catch (_err) {
+    } catch (err) {
       if (v[1]) {
         fail(`${v[0]} should have been valid`);
       }
+      assert(err.message.includes(v[2]));
     }
   });
 });
