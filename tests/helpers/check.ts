@@ -29,7 +29,6 @@ export function check(
   });
 
   const task = new Promise((done) => {
-    // deno-lint-ignore no-unused-vars
     const i = setInterval(async () => {
       try {
         const v = await fn();

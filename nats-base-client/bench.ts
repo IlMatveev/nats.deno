@@ -217,7 +217,6 @@ export class Bench {
     if (this.req) {
       const d = deferred<void>();
       jobs.push(d);
-      // deno-lint-ignore no-unused-vars
       const sub = this.nc.subscribe(
         this.subject,
         {
