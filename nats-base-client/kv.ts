@@ -34,14 +34,10 @@ import {
   StreamConfig,
 } from "./types.ts";
 import { JetStreamClientImpl } from "./jsclient.ts";
-import {
-  createInbox,
-  headers,
-  isFlowControlMsg,
-  isHeartbeatMsg,
-  millis,
-  toJsMsg,
-} from "./mod.ts";
+import { createInbox } from "./nuid.ts";
+import { headers } from "./headers.ts";
+import { isFlowControlMsg, isHeartbeatMsg, millis } from "./jsutil.ts";
+import { toJsMsg } from "./jsmsg.ts";
 import { JetStreamManagerImpl } from "./jsm.ts";
 import { checkJsError } from "./jsutil.ts";
 import { isNatsError } from "./error.ts";

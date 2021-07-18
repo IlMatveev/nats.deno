@@ -132,3 +132,11 @@ export class Nuid {
 }
 
 export const nuid = new Nuid();
+
+export function createInbox(prefix = ""): string {
+  prefix = prefix || "_INBOX";
+  if (typeof prefix !== "string") {
+    throw (new Error("prefix must be a string"));
+  }
+  return `${prefix}.${nuid.next()}`;
+}

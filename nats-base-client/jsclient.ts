@@ -57,7 +57,7 @@ import { ErrorCode, isNatsError, NatsError } from "./error.ts";
 import { SubscriptionImpl } from "./subscription.ts";
 import { QueuedIterator, QueuedIteratorImpl } from "./queued_iterator.ts";
 import { Timeout, timeout } from "./util.ts";
-import { createInbox } from "./protocol.ts";
+import { createInbox } from "./nuid.ts";
 import { headers } from "./headers.ts";
 import type { ConsumerOptsBuilder } from "./types.ts";
 import { consumerOpts, isConsumerOptsBuilder } from "./jsconsumeropts.ts";

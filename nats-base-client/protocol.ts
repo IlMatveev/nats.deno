@@ -36,7 +36,6 @@ import {
   extend,
   timeout,
 } from "./util.ts";
-import { nuid } from "./nuid.ts";
 import { DataBuffer } from "./databuffer.ts";
 import { ServerImpl, Servers } from "./servers.ts";
 import {
@@ -57,14 +56,6 @@ import { fastDecoder, fastEncoder } from "./encoders.ts";
 const FLUSH_THRESHOLD = 1024 * 32;
 
 export const INFO = /^INFO\s+([^\r\n]+)\r\n/i;
-
-export function createInbox(prefix = ""): string {
-  prefix = prefix || "_INBOX";
-  if (typeof prefix !== "string") {
-    throw (new Error("prefix must be a string"));
-  }
-  return `${prefix}.${nuid.next()}`;
-}
 
 const PONG_CMD = fastEncoder("PONG\r\n");
 const PING_CMD = fastEncoder("PING\r\n");

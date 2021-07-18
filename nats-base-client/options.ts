@@ -28,7 +28,7 @@ import {
 } from "./types.ts";
 import { buildAuthenticator } from "./authenticator.ts";
 import { defaultPort } from "./transport.ts";
-import { createInbox } from "./mod.ts";
+import { createInbox } from "./nuid.ts";
 
 export function defaultOptions(): ConnectionOptions {
   return {

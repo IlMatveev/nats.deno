@@ -14,7 +14,7 @@
  */
 
 import { deferred, isUint8Array } from "./util.ts";
-import { createInbox, ProtocolHandler } from "./protocol.ts";
+import { ProtocolHandler } from "./protocol.ts";
 import { SubscriptionImpl } from "./subscription.ts";
 import { ErrorCode, NatsError } from "./error.ts";
 import {
@@ -39,6 +39,7 @@ import { Request } from "./request.ts";
 import { isRequestError } from "./msg.ts";
 import { JetStreamManagerImpl } from "./jsm.ts";
 import { JetStreamClientImpl } from "./jsclient.ts";
+import { createInbox } from "./nuid.ts";
 
 export class NatsConnectionImpl implements NatsConnection {
   options: ConnectionOptions;

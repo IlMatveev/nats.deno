@@ -1,5 +1,5 @@
 export { NatsConnectionImpl } from "./nats.ts";
-export { Nuid, nuid } from "./nuid.ts";
+export { createInbox, Nuid, nuid } from "./nuid.ts";
 export { ErrorCode, NatsError } from "./error.ts";
 export type {
   Msg,
@@ -77,7 +77,7 @@ export { SubscriptionImpl } from "./subscription.ts";
 export { Subscriptions } from "./subscriptions.ts";
 export { setTransportFactory } from "./transport.ts";
 export type { Transport, TransportFactory } from "./transport.ts";
-export { Connect, createInbox, INFO, ProtocolHandler } from "./protocol.ts";
+export { Connect, INFO, ProtocolHandler } from "./protocol.ts";
 export type { Deferred, Timeout } from "./util.ts";
 export {
   deferred,

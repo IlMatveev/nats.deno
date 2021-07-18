@@ -15,7 +15,7 @@
 import type { Request } from "./request.ts";
 import type { Msg } from "./types.ts";
 import { ErrorCode, NatsError } from "./error.ts";
-import { createInbox } from "./protocol.ts";
+import { createInbox } from "./nuid.ts";
 import { isRequestError } from "./msg.ts";
 
 export class MuxSubscription {
