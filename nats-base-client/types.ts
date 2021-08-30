@@ -100,6 +100,7 @@ export interface ConnectionOptions {
   timeout?: number;
   tls?: TlsOptions;
   token?: string;
+  cookie?: string;
   user?: string;
   verbose?: boolean;
   waitOnFirstConnect?: boolean;
